@@ -73,7 +73,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true)
+        UIView.animate(
+            withDuration: 1,
+            animations: {
+                self.imageView.alpha = 0
+            },
+            completion: { _ in
+                self.present(picker, animated: true)
+                UIView.animate(
+                    withDuration: 1.5,
+                    animations: {
+                        self.imageView.alpha = 1
+                    }
+                )
+            }
+        )
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
